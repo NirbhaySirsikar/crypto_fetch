@@ -23,4 +23,4 @@ class Coin {
         symbol: json['symbol']);
   }
 }
-List<Coin> coinlist = [];
+List<Coin> coinList = [];
