@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:workshop_1/coin_model.dart';
 import 'package:workshop_1/coin_card.dart';
@@ -46,8 +44,10 @@ class _HomeState extends State<Home> {
         }
         setState(() => coinList);
       }
+      return coinList;
+    } else {
+      throw Exception("Failed...");
     }
-    return coinList;
   }
 
   @override
@@ -60,7 +60,30 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        backgroundColor: Colors.grey,
+        title: Text(
+          'Crypto currencies',
+          style: TextStyle(
+              color: Colors.grey[800],
+              fontSize: 20,
+              fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: coinList.length,
+        itemBuilder: (context, index) {
+          return CoinCard(
+              name: coinList[index].name,
+              change: coinList[index].change.toDouble(),
+              changePercentage: coinList[index].changePercentage.toDouble(),
+              imageURL: coinList[index].imageURL,
+              price: coinList[index].price.toDouble(),
+              symbol: coinList[index].symbol);
+        },
+      ),
     );
   }
 }
